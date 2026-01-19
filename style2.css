@@ -1,0 +1,184 @@
+/*default style: laptop and pc*/
+@font-face {
+    font-family: "InterTight";
+    src: url("fonts/InterTight-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans";
+    src: url("fonts/SourceHanSansSC-VF.ttf");
+}
+
+@font-face {
+    font-family: "Libre";
+    src: url("fonts/LibreCaslonCondensed-Italic[wght].ttf");
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: white;
+}
+
+p {
+    color: #1b2a3d;
+}
+
+#logoTop, #logoBottom {
+    color: #1b2a3d;
+    position: fixed;
+    font-size: 2rem;
+    font-family: SourceSans;
+    margin: 0%;
+}
+
+#logoTop {
+    top: 2rem;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+#logoBottom {
+    top: calc(3rem + 1rem);
+    left: calc(1rem + 1rem);
+    transform: translateY(-50%);
+}
+
+#copyright {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: InterTight;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+#loginPanel {
+    position: fixed;
+    right: 15%;
+    transform: translateY(-50%);
+    top: 45%;
+    font-family: InterTight;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1b2a3d;
+}
+
+#loginPanel input {
+    font-size: 1.5rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: 2px solid #1b2a3d;
+}
+
+#loginPanel div {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#loginPanel button {
+    display: block;
+    margin-left: auto;
+    width: 7rem;
+    height: 3rem;
+    color: #1b2a3d;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.9px);
+    -webkit-backdrop-filter: blur(2.9px);
+    border: 2px solid #1b2a3d;
+}
+
+#loginPanel h1 {
+    font-family: SourceSans;
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+#logbox {
+    padding-right: 1rem;
+    
+}
+
+#passbox {
+    padding-right: 1.3rem;
+}
+
+.navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.navbar a {
+    font-family: InterTight;
+    text-decoration: none;
+    color: #1b2a3d;
+    font-weight: 600;
+    font-size: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 10px;
+    outline: 2px solid #1b2a3d;
+    border-radius: 15px;
+}
+
+
+#invbut {
+    font-family: SourceSans;
+    font-size: 2rem;
+    position: fixed;
+    right: 0;
+    padding: 5px;
+    outline: 2px solid #1b2a3d;
+    color: #1b2a3d;
+    background-color: white;
+    font-weight: 600;
+    border-radius: 25px;
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+
+#invbut:hover {
+    transform: scale(0.95);
+}
+
+#invbut:active {
+    transform: scale(0.9);
+}
+
+
+
+
+/* dynamic */
+#bubbles {
+    position: absolute;
+    top: 6rem;
+    left: 3rem;
+}
+
+.bubble {
+    outline: 1px solid #1b2a3d;
+    font-family: InterTight, SourceSans;
+    font-size: 1rem;
+    display: inline-block;
+    mar
+}
+
+.propic {
+    width: 3rem;
+    height: auto;
+    display: inline-block;
+}

@@ -1,0 +1,164 @@
+/*default style: laptop and pc*/
+@font-face {
+    font-family: "InterTight";
+    src: url("fonts/InterTight-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans";
+    src: url("fonts/SourceHanSansSC-VF.ttf");
+}
+
+@font-face {
+    font-family: "Libre";
+    src: url("fonts/LibreCaslonCondensed-Italic[wght].ttf");
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background: white;
+}
+
+p {
+    color: #1b2a3d;
+}
+
+#logoTop, #logoBottom {
+    color: #1b2a3d;
+    position: fixed;
+    font-size: 10rem;
+    font-family: SourceSans;
+    margin: 0%;
+}
+
+#logoTop {
+    top: calc(50% - 5rem);
+    left: 10%;
+    transform: translateY(-50%);
+}
+
+#logoBottom {
+    top: calc(50% + 5rem);
+    left: calc(10% + 5rem);
+    transform: translateY(-50%);
+}
+
+#copyright {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: InterTight;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+#loginPanel {
+    position: fixed;
+    right: 15%;
+    transform: translateY(-50%);
+    top: 45%;
+    font-family: InterTight;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1b2a3d;
+}
+
+#loginPanel input {
+    font-size: 1.5rem;
+    height: 2rem;
+    border-radius: 1rem;
+    border: 2px solid #1b2a3d;
+}
+
+#loginPanel div {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#loginPanel button {
+    display: block;
+    margin-left: auto;
+    width: 7rem;
+    height: 3rem;
+    color: #1b2a3d;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2.9px);
+    -webkit-backdrop-filter: blur(2.9px);
+    border: 2px solid #1b2a3d;
+}
+
+#loginPanel h1 {
+    font-family: SourceSans;
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+#logbox {
+    padding-right: 1rem;
+    
+}
+
+#passbox {
+    padding-right: 1.3rem;
+}
+
+
+/*tablets style*/
+@media screen and (max-width: 991px) {
+
+    #logoTop {
+        position: absolute;
+        top: calc(20% - 5rem);
+        left: calc(50% - 2.5rem);
+        transform: translateY(-50%) translateX(-50%);
+    }
+
+    #logoBottom {
+        position: absolute;
+        top: calc(20% + 5rem);
+        left: calc(50% + 2.5rem);
+        transform: translateY(-50%) translateX(-50%);
+            
+    }
+
+    #loginPanel {
+        position: fixed;
+        bottom: 0;
+        right: 50%;
+        transform: translateX(+50%);
+        white-space: nowrap;
+    }
+}
+
+
+/*phones style*/
+@media screen and (max-width: 600px) {
+
+    #loginPanel label, input {
+        display: block;
+    }
+
+    #loginPanel div {
+        padding: 0.5rem;
+    }
+
+    #loginPanel h1 {
+        margin: 0;
+    }
+
+    #logoTop, #logoBottom {
+        font-size: 10rem;
+    }
+}
