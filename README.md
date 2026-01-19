@@ -1,2 +1,2 @@
-# -
-A foundation for human connections
+# 元联 OriLink
+Revolutionizing student connections.
