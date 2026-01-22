@@ -15,7 +15,8 @@
 }
 
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -27,7 +28,8 @@ p {
     color: #1b2a3d;
 }
 
-#logoTop, #logoBottom {
+#logoTop,
+#logoBottom {
     color: #1b2a3d;
     position: fixed;
     font-size: 2rem;
@@ -107,7 +109,7 @@ p {
 
 #logbox {
     padding-right: 1rem;
-    
+
 }
 
 #passbox {
@@ -120,6 +122,7 @@ p {
     width: 100%;
     text-align: center;
     margin-bottom: 1.5rem;
+    z-index: 100;
 }
 
 .navbar a {
@@ -133,8 +136,13 @@ p {
     padding: 10px;
     outline: 2px solid #1b2a3d;
     border-radius: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: background-color 0.2s;
 }
 
+.navbar a.active {
+    background: rgba(27, 42, 61, 0.1);
+}
 
 #invbut {
     font-family: SourceSans;
@@ -149,6 +157,8 @@ p {
     border-radius: 25px;
     margin-right: 1rem;
     margin-top: 1rem;
+    cursor: pointer;
+    z-index: 10;
 }
 
 #invbut:hover {
@@ -160,25 +170,281 @@ p {
 }
 
 
-
-
-/* dynamic */
-#bubbles {
+/* dynamic invations style */
+#invitations-container,
+#ongoing-container {
     position: absolute;
     top: 6rem;
     left: 3rem;
+    right: 3rem;
+    bottom: 6rem;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    /* Ensure items stack nicely */
+    gap: 1.5rem;
+    padding: 1rem;
 }
 
-.bubble {
-    outline: 1px solid #1b2a3d;
-    font-family: InterTight, SourceSans;
-    font-size: 1rem;
-    display: inline-block;
-    mar
-}
 
-.propic {
-    width: 3rem;
+/* Compact Invite Card (New) */
+.invite-card {
+    width: 220px;
+    /* Smaller width */
     height: auto;
-    display: inline-block;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    color: #1b2a3d;
+    font-family: InterTight;
+
+    /* Glassmorphism */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid #1b2a3d;
+}
+
+.invite-card img.propic {
+    width: 50px;
+    /* Smaller propic */
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid #1b2a3d;
+}
+
+.invite-card h3 {
+    margin: 0.2rem 0 0 0;
+    font-size: 1.2rem;
+    /* Smaller font */
+    font-weight: 600;
+    font-family: SourceSans;
+    text-align: center;
+}
+
+.invite-card p.activity {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.invite-card p.time {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.invite-card button.join-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+    padding: 0.3rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #1b2a3d;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.invite-card button.join-btn:hover {
+    background-color: #2c425e;
+}
+
+
+/* Big Ongoing Card (New) */
+.ongoing-card {
+    width: 400px;
+    height: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Left align for bigger feel */
+    gap: 1rem;
+    color: #1b2a3d;
+    font-family: InterTight;
+
+    /* Stronger Glassmorphism */
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 2px solid #1b2a3d;
+}
+
+.ongoing-card .header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.ongoing-card img.propic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #1b2a3d;
+}
+
+.ongoing-card .info {
+    flex-grow: 1;
+}
+
+.ongoing-card h3 {
+    margin: 0;
+    font-size: 2rem;
+    font-family: SourceSans;
+}
+
+.ongoing-card p.activity {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.ongoing-card p.time {
+    font-size: 1.1rem;
+}
+
+.ongoing-card button.enter-chat-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: #1b2a3d;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: SourceSans;
+}
+
+.ongoing-card button.enter-chat-btn:hover {
+    background-color: #2c425e;
+}
+
+
+/* Chat Box Overlay */
+#chat-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+    display: none;
+    /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+}
+
+#chat-overlay.active {
+    display: flex;
+}
+
+.chat-box {
+    width: 90%;
+    max-width: 600px;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border: 2px solid #1b2a3d;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.chat-header {
+    padding: 1rem;
+    background: #1b2a3d;
+    color: white;
+    font-family: SourceSans;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.close-chat {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    font-family: InterTight;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.message {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.message.sent {
+    background: #e1e8ed;
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+}
+
+.message.system {
+    align-self: center;
+    background: transparent;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.chat-input-area {
+    padding: 1rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    gap: 0.5rem;
+    background: white;
+}
+
+.chat-input-area input {
+    flex-grow: 1;
+    padding: 0.5rem;
+    border: 2px solid #1b2a3d;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: InterTight;
+}
+
+.chat-input-area button {
+    padding: 0.5rem 1rem;
+    background: #1b2a3d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: SourceSans;
+    font-weight: 600;
 }

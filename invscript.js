@@ -1,20 +1,64 @@
 const invbut = document.getElementById('invbut');
-const bubbles = document.getElementById('bubbles');
+const container = document.getElementById('invitations-container');
 
-invbut.addEventListener('click', function() {
-    // 1. Create a new element (e.g., a <p> tag)
-    const newPic = document.createElement('img');
-    const newBubble = document.createElement('p');
+// Mock data
+const names = ["Kevin", "Alice", "Bob", "Charlie", "Diana"];
+const activities = ["Basketball", "Study Session", "Lunch", "Gaming", "Discussion"];
 
-    // 2. Set the content for the new element
-    newPic.src = 'imgs/propicph.png';
-    newBubble.textContent = '一二三同学：';
-    
-    // Optional: Add a class for styling
-    newPic.classList.add('propic');
-    newBubble.classList.add('bubble');
+function getRandomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
 
-    // 3. Append the new element to the container
-    bubbles.appendChild(newPic);
-    bubbles.appendChild(newBubble);
+// 1. Invite Button Logic
+invbut.addEventListener('click', function () {
+    const card = document.createElement('div');
+    card.classList.add('invite-card'); // Uses new compact style
+
+    const name = getRandomItem(names);
+    const activity = getRandomItem(activities);
+
+    // Create random future time
+    const now = new Date();
+    const future = new Date(now.getTime() + Math.random() * 3 * 60 * 60 * 1000);
+    const timeString = future.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    // Generate unique ID for the activity
+    const activityId = Date.now().toString() + Math.random().toString().slice(2);
+
+    card.innerHTML = `
+        <img src="imgs/propicph.png" class="propic" alt="Profile">
+        <h3>${name}</h3>
+        <p class="activity">${activity}</p>
+        <p class="time">${timeString}</p>
+        <button class="join-btn" data-id="${activityId}">Join</button>
+    `;
+
+    // Add Join Event Listener
+    const joinBtn = card.querySelector('.join-btn');
+    joinBtn.addEventListener('click', () => {
+        handleJoin(activityId, name, activity, timeString);
+    });
+
+    container.appendChild(card);
 });
+
+function handleJoin(id, name, activity, time) {
+    // 1. Get existing joined activities or init empty array
+    let joined = JSON.parse(localStorage.getItem('joinedActivities')) || [];
+
+    // 2. Add new activity
+    joined.push({
+        id: id,
+        host: name,
+        activity: activity,
+        time: time,
+        joinedAt: new Date().toISOString()
+    });
+
+    // 3. Save back to localStorage
+    localStorage.setItem('joinedActivities', JSON.stringify(joined));
+
+    // 4. Feedback & Redirect
+    alert(`You joined ${activity} with ${name}! Redirecting to Ongoing...`);
+    window.location.href = 'ongoing.html';
+}
