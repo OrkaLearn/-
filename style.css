@@ -27,6 +27,20 @@ body {
     /* overflow: hidden; -> kept from original but ensured */
 }
 
+main {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+#logo {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    z-index: 10;
+}
+
 /* Blurred Clouds Effect */
 .cloud {
     position: absolute;
@@ -78,7 +92,7 @@ p {
 #logoTop,
 #logoBottom {
     color: #1b2a3d;
-    position: fixed;
+    position: absolute;
     font-size: 10rem;
     font-family: SourceSans;
     margin: 0%;
@@ -86,14 +100,14 @@ p {
 
 #logoTop {
     top: calc(50% - 5rem);
-    left: 10%;
-    transform: translateY(-50%);
+    left: calc(50% - 2.5rem);
+    transform: translate(-50%, -50%);
 }
 
 #logoBottom {
     top: calc(50% + 5rem);
-    left: calc(10% + 5rem);
-    transform: translateY(-50%);
+    left: calc(50% + 2.5rem);
+    transform: translate(-50%, -50%);
 }
 
 #copyright {
@@ -107,14 +121,16 @@ p {
 }
 
 #loginPanel {
-    position: fixed;
-    right: 15%;
-    transform: translateY(-50%);
-    top: 45%;
+    /* position: fixed; removed for flex layout */
+    /* right: 15%; removed */
+    /* transform: translateY(-50%); removed */
+    /* top: 45%; removed */
+    margin-right: 15%;
     font-family: InterTight;
     font-size: 1.5rem;
     font-weight: 600;
     color: #1b2a3d;
+    z-index: 10;
 }
 
 #loginPanel input {
@@ -167,26 +183,47 @@ p {
 /*tablets style*/
 @media screen and (max-width: 991px) {
 
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        /* Ensure copyright space */
+        padding-bottom: 2rem;
+        box-sizing: border-box;
+    }
+
+    #logo {
+        position: relative;
+        /* Use flex basis to allocate top space for logo */
+        flex: 0 0 35%;
+        width: 100%;
+        height: auto;
+    }
+
     #logoTop {
         position: absolute;
-        top: calc(20% - 5rem);
+        top: calc(50% - 5rem);
         left: calc(50% - 2.5rem);
-        transform: translateY(-50%) translateX(-50%);
+        transform: translate(-50%, -50%);
     }
 
     #logoBottom {
         position: absolute;
-        top: calc(20% + 5rem);
+        top: calc(50% + 5rem);
         left: calc(50% + 2.5rem);
-        transform: translateY(-50%) translateX(-50%);
-
+        transform: translate(-50%, -50%);
     }
 
     #loginPanel {
-        position: fixed;
-        bottom: 0;
-        right: 50%;
-        transform: translateX(+50%);
+        position: static;
+        flex: 0 0 auto;
+        margin: 0;
+        transform: none;
+        top: auto;
+        right: auto;
+        bottom: auto;
         white-space: nowrap;
     }
 }
@@ -206,6 +243,7 @@ p {
 
     #loginPanel h1 {
         margin: 0;
+        margin-top: 2rem;
     }
 
     #logoTop,
