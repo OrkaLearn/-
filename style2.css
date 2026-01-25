@@ -21,7 +21,53 @@ body {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background: white;
+    /* Modern Sky Blue Gradient Background */
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    position: relative;
+}
+
+/* Blurred Clouds Effect */
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    filter: blur(40px);
+    z-index: 0;
+    animation: drift 20s infinite alternate ease-in-out;
+}
+
+.cloud-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 10%;
+}
+
+.cloud-2 {
+    width: 400px;
+    height: 400px;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: -5s;
+}
+
+.cloud-3 {
+    width: 200px;
+    height: 200px;
+    top: 40%;
+    left: 40%;
+    filter: blur(60px);
+    animation-delay: -10s;
+}
+
+@keyframes drift {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(30px, -30px);
+    }
 }
 
 p {

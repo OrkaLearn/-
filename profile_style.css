@@ -1,0 +1,310 @@
+@font-face {
+    font-family: "InterTight";
+    src: url("fonts/InterTight-VariableFont_wght.ttf");
+}
+
+@font-face {
+    font-family: "SourceSans";
+    src: url("fonts/SourceHanSansSC-VF.ttf");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'InterTight', sans-serif;
+    color: #1b2a3d;
+    height: 100vh;
+    overflow: hidden;
+    /* Modern Sky Blue Gradient Background */
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    position: relative;
+}
+
+/* Blurred Clouds Effect */
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    filter: blur(40px);
+    z-index: 0;
+    animation: drift 20s infinite alternate ease-in-out;
+}
+
+.cloud-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 10%;
+}
+
+.cloud-2 {
+    width: 400px;
+    height: 400px;
+    bottom: 10%;
+    right: 10%;
+    animation-delay: -5s;
+}
+
+.cloud-3 {
+    width: 200px;
+    height: 200px;
+    top: 40%;
+    left: 40%;
+    filter: blur(60px);
+    animation-delay: -10s;
+}
+
+@keyframes drift {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(30px, -30px);
+    }
+}
+
+/* Header & Navbar (Synced with style2.css) */
+header {
+    position: relative;
+    z-index: 10;
+}
+
+/* Replaced #logo with specific positioning to match style2.css */
+#logoTop,
+#logoBottom {
+    color: #1b2a3d;
+    position: fixed;
+    font-size: 2rem;
+    font-family: SourceSans;
+    margin: 0%;
+}
+
+#logoTop {
+    top: 2rem;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+#logoBottom {
+    top: calc(3rem + 1rem);
+    left: calc(1rem + 1rem);
+    transform: translateY(-50%);
+}
+
+.navbar {
+    position: fixed;
+    bottom: 0;
+    /* Changed from 2rem to 0 */
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    /* Added margin-bottom */
+    z-index: 100;
+}
+
+.navbar a {
+    font-family: InterTight;
+    text-decoration: none;
+    color: #1b2a3d;
+    font-weight: 600;
+    font-size: 2rem;
+    /* Increased size to match style2.css */
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 10px;
+    outline: 2px solid #1b2a3d;
+    /* Replaced border with outline */
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    transition: background-color 0.2s;
+    /* Removed backdrop-filter, border, box-shadow from profile_style */
+}
+
+
+
+.navbar a.active {
+    background: rgba(27, 42, 61, 0.1);
+    /* Removed color/border override */
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 1000px;
+    height: 75vh;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Sidebar / Left Panel */
+.profile-sidebar {
+    width: 300px;
+    background: rgba(255, 255, 255, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
+}
+
+.profile-pic-container {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.username-display {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+}
+
+.nickname-display {
+    font-size: 1.1rem;
+    opacity: 0.7;
+    margin-top: -0.5rem;
+}
+
+.logout-btn {
+    margin-top: auto;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 100, 100, 0.3);
+    transition: transform 0.2s;
+    text-decoration: none;
+    /* acts as link */
+    display: inline-block;
+}
+
+.logout-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Content / Right Panel */
+.profile-content {
+    flex: 1;
+    padding: 3rem;
+    overflow-y: auto;
+}
+
+h2 {
+    font-family: SourceSans;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #4a5568;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
+    font-family: InterTight;
+    font-size: 1rem;
+    color: #1b2a3d;
+    transition: all 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(161, 196, 253, 0.3);
+}
+
+/* Hobbies Section */
+.hobbies-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.hobby-tag {
+    background: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.remove-hobby {
+    cursor: pointer;
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.add-hobby-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    padding: 0.8rem 1.5rem;
+    background: #1b2a3d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background: #2c425e;
+}
+
+#save-message {
+    margin-top: 1rem;
+    color: #28a745;
+    font-weight: 600;
+    height: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+}

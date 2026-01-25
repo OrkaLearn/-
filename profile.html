@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>元联 - Profile</title>
+    <link rel="stylesheet" href="profile_style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <section id="logo">
+            <h1 id="logoTop">元</h1>
+            <h1 id="logoBottom">联</h1>
+        </section>
+    </header>
+
+    <!-- Background Clouds -->
+    <div class="cloud cloud-1"></div>
+    <div class="cloud cloud-2"></div>
+    <div class="cloud cloud-3"></div>
+
+    <main>
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <div class="profile-sidebar">
+                <div class="profile-pic-container">
+                    <img src="imgs/propicph.png" alt="Profile Picture" class="profile-pic" id="profile-pic">
+                </div>
+                <div class="username-display" id="display-username">Loading...</div>
+                <div class="nickname-display" id="display-nickname">...</div>
+
+                <a href="/logout" class="logout-btn">Log Out</a>
+            </div>
+
+            <!-- Content -->
+            <div class="profile-content">
+                <h2>Profile Settings</h2>
+
+                <div class="form-group">
+                    <label>Nickname</label>
+                    <input type="text" id="nickname-input" placeholder="Enter your nickname">
+                </div>
+
+                <div class="form-group">
+                    <label>New Password</label>
+                    <input type="password" id="password-input" placeholder="Leave blank to keep current">
+                </div>
+
+                <div class="form-group">
+                    <label>Hobbies</label>
+                    <div class="hobbies-list" id="hobbies-list">
+                        <!-- Hobbies will be injected here -->
+                    </div>
+                    <div class="add-hobby-container">
+                        <input type="text" id="new-hobby-input" placeholder="Add a hobby...">
+                        <button class="btn-primary" id="add-hobby-btn">Add</button>
+                    </div>
+                </div>
+
+                <button class="btn-primary" id="save-btn" style="width: 100%; margin-top: 1rem;">Save Changes</button>
+                <div id="save-message">Changes saved successfully!</div>
+            </div>
+        </div>
+
+        <div class="navbar">
+            <a href="invitations.html">Invitations</a>
+            <a href="ongoing.html">Ongoing</a>
+            <a href="profile.html" class="active">Profile</a>
+        </div>
+    </main>
+
+    <script>
+        // Use inline script for simplicity given the task, or could create profile_script.js
+        document.addEventListener('DOMContentLoaded', () => {
+            const nicknameInput = document.getElementById('nickname-input');
+            const passwordInput = document.getElementById('password-input');
+            const hobbiesList = document.getElementById('hobbies-list');
+            const newHobbyInput = document.getElementById('new-hobby-input');
+            const addHobbyBtn = document.getElementById('add-hobby-btn');
+            const saveBtn = document.getElementById('save-btn');
+            const saveMessage = document.getElementById('save-message');
+
+            const displayUsername = document.getElementById('display-username');
+            const displayNickname = document.getElementById('display-nickname');
+            const profilePic = document.getElementById('profile-pic');
+
+            let currentHobbies = [];
+
+            // 1. Fetch Profile Data
+            fetch('/profile-data')
+                .then(res => {
+                    if (res.status === 401) window.location.href = '/';
+                    return res.json();
+                })
+                .then(data => {
+                    displayUsername.textContent = '@' + data.username;
+                    displayNickname.textContent = data.nickname;
+                    nicknameInput.value = data.nickname;
+                    profilePic.src = data.profilePic || 'imgs/propicph.png';
+
+                    currentHobbies = data.hobbies || [];
+                    renderHobbies();
+                })
+                .catch(err => console.error(err));
+
+            // 2. Render Hobbies
+            function renderHobbies() {
+                hobbiesList.innerHTML = '';
+                currentHobbies.forEach((hobby, index) => {
+                    const tag = document.createElement('div');
+                    tag.className = 'hobby-tag';
+                    tag.innerHTML = `
+                        ${hobby} 
+                        <span class="remove-hobby" onclick="removeHobby(${index})">&times;</span>
+                    `;
+                    hobbiesList.appendChild(tag);
+                });
+            }
+
+            // Global function to remove hobby (needed for onclick)
+            window.removeHobby = (index) => {
+                currentHobbies.splice(index, 1);
+                renderHobbies();
+            };
+
+            // 3. Add Hobby
+            addHobbyBtn.addEventListener('click', () => {
+                const val = newHobbyInput.value.trim();
+                if (val) {
+                    currentHobbies.push(val);
+                    newHobbyInput.value = '';
+                    renderHobbies();
+                }
+            });
+
+            // 4. Save Changes
+            saveBtn.addEventListener('click', () => {
+                const newData = {
+                    nickname: nicknameInput.value,
+                    hobbies: currentHobbies
+                };
+
+                if (passwordInput.value) {
+                    newData.password = passwordInput.value;
+                }
+
+                fetch('/update-profile', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newData)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Update display
+                            displayNickname.textContent = nicknameInput.value;
+
+                            // Show message
+                            saveMessage.style.opacity = '1';
+                            setTimeout(() => {
+                                saveMessage.style.opacity = '0';
+                            }, 2000);
+
+                            // Clear password field
+                            passwordInput.value = '';
+                        }
+                    });
+            });
+        });
+    </script>
+</body>
+
+</html>
