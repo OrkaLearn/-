@@ -1,2 +1,2 @@
 # 元联 OriLink
-Revolutionizing student connections.
+The Alpha version of OriLink (Archived). Revolutionizing student connections.
